@@ -39,15 +39,14 @@ const displayTrending = (trendingData) => {
 // Home page ends
 
 // Products page starts
- const  showProducts = () => {
-  document.getElementById("products-section").classList.remove("hidden")
-  document.getElementById("main-section").classList.add("hidden")
- }
- const  showMain = () => {
-  document.getElementById("products-section").classList.add("hidden")
-  document.getElementById("main-section").classList.remove("hidden")
- }
-
+const showProducts = () => {
+  document.getElementById("products-section").classList.remove("hidden");
+  document.getElementById("main-section").classList.add("hidden");
+};
+const showMain = () => {
+  document.getElementById("products-section").classList.add("hidden");
+  document.getElementById("main-section").classList.remove("hidden");
+};
 
 const loadCategory = () => {
   const url = "https://fakestoreapi.com/products/categories";
@@ -69,12 +68,22 @@ const loadProductsByCategory = (category) => {
     .then((data) => displayAllProducts(data));
 };
 
-
 const loadProductDetails = async (id) => {
   const url = `https://fakestoreapi.com/products/${id}`;
   const res = await fetch(url);
   const data = await res.json();
   displayProductDetails(data);
+};
+
+let add = 0;
+let total = 0;
+const count = (price) => {
+  add++;
+  total = total + price;
+
+  document.getElementById("count-badge").innerText = add;
+  document.getElementById("count-cart").innerText = add;
+  document.getElementById("total").innerText = total;
 };
 
 const displayProductDetails = (products) => {
@@ -94,15 +103,13 @@ const displayProductDetails = (products) => {
             <p class="font-bold">$${products.price}</p>
             <p>${products.description}</p>
             <div class="flex justify-between">
-                <button class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i>Buy Now</button>
+                <button onclick="count(${products.price})" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i>Buy Now</button>
             </div>
         </div>
     </div>
   `;
   document.getElementById("product_modal").showModal();
 };
-
-
 
 const displayAllProducts = (products) => {
   const allProducts = document.getElementById("all-products");
@@ -126,7 +133,7 @@ const displayAllProducts = (products) => {
             
             <div class="flex justify-between">
                 <button onclick="loadProductDetails(${product.id})" class="btn"><i class="fa-solid fa-circle-info"></i>Details</button>
-                <button class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i>Buy Now</button>
+                <button onclick="count(${product.price})" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i>Buy Now</button>
             </div>
         </div>
     </div>
