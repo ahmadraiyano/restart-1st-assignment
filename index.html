@@ -31,8 +31,8 @@
                 </div>
                 <div class="navbar-center hidden lg:flex">
                     <ul class="menu menu-horizontal px-1">
-                        <li><a>Home</a></li>
-                        <li><a>Products</a></li>
+                        <li><a onclick="showMain()">Home</a></li>
+                        <li><a onclick="showProducts()">Products</a></li>
                         <li><a>About</a></li>
                         <li><a>Contact</a></li>
                     </ul>
@@ -72,9 +72,9 @@
                             </svg>
                         </div>
                         <ul tabindex="-1"
-                            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            <li><a>Home</a></li>
-                            <li><a>Products</a></li>
+                            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-2 w-20 md:w-36 p-2 shadow -ml-5">
+                            <li><a onclick="showMain()">Home</a></li>
+                            <li><a onclick="showProducts()">Products</a></li>
                             <li><a>About</a></li>
                             <li><a>Contact</a></li>
                         </ul>
@@ -84,7 +84,7 @@
         </div>
 
     </header>
-    <main>
+    <main id="main-section">
         <!-- Hero starts -->
         <section>
             <div class="hero h-[600px]" style="background-image: url(./Assets/banner-image.png);">
@@ -166,17 +166,15 @@
             </div>
         </section>
     </main>
-    <section class="w-11/12 md:w-10/12 xl:w-9/12 2xl:w-8/12 mx-auto">
+    <section id="products-section" class="w-11/12 md:w-10/12 xl:w-9/12 2xl:w-8/12 mx-auto my-16 hidden">
         <div class="product-category">
             <div class="mb-4">
                 <h2 class="text-center font-bold text-3xl">Our Products</h2>
             </div>
-            <div id="product-category" class="flex flex-wrap justify-center gap-4">
+            <div id="product-category" class="flex flex-wrap justify-center gap-4 my-10">
                 
             </div>
         </div>
-    </section>
-    <section class="w-11/12 md:w-10/12 xl:w-9/12 2xl:w-8/12 mx-auto my-16">
         <div id="all-products" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center"></div>
     </section>
 
