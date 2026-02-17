@@ -69,6 +69,41 @@ const loadProductsByCategory = (category) => {
     .then((data) => displayAllProducts(data));
 };
 
+
+const loadProductDetails = async (id) => {
+  const url = `https://fakestoreapi.com/products/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayProductDetails(data);
+};
+
+const displayProductDetails = (products) => {
+  const detailProducts = document.getElementById("details-container");
+  detailProducts.innerHTML = `
+                <div class="card bg-base-100 max-w-96">
+        <div class="h-72  bg-gray-400">
+            <img class="h-full mx-auto items-center" src="${products.image}" alt="${products.category}" />
+        </div>
+        <div class="p-5 space-y-4">
+            <div class="flex justify-between">
+                <p class="text-[#4F39F6] bg-[#4F39F620] px-2 rounded-xl">${products.category}</p>
+                <p><span class="text-yellow-500 mr-1"><i class="fa-solid fa-star"></i></span>${products.rating.rate}
+                    (${products.rating.count})</p>
+            </div>
+            <h2 class="card-title">${products.title}</h2>
+            <p class="font-bold">$${products.price}</p>
+            <p>${products.description}</p>
+            <div class="flex justify-between">
+                <button class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i>Buy Now</button>
+            </div>
+        </div>
+    </div>
+  `;
+  document.getElementById("product_modal").showModal();
+};
+
+
+
 const displayAllProducts = (products) => {
   const allProducts = document.getElementById("all-products");
   allProducts.innerHTML = "";
@@ -88,8 +123,9 @@ const displayAllProducts = (products) => {
             </div>
             <h2 class="card-title">${product.title}</h2>
             <p class="font-bold">$${product.price}</p>
+            
             <div class="flex justify-between">
-                <button class="btn"><i class="fa-solid fa-circle-info"></i>Details</button>
+                <button onclick="loadProductDetails(${product.id})" class="btn"><i class="fa-solid fa-circle-info"></i>Details</button>
                 <button class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i>Buy Now</button>
             </div>
         </div>
